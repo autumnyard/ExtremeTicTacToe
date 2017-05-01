@@ -4,37 +4,63 @@ using UnityEngine;
 
 public class Board : MonoBehaviour
 {
-
+    #region Variables
+    // Data
     private const int numberRows = 3;
     private const int numberColumns = 3;
     // int[,] myArray = new int[4,2];
+
+    // Components
+    public Rigidbody model;
     public BoardPosition[,] grid;
     [SerializeField] private BoardPosition[] gridRow1 = new BoardPosition[numberColumns];
     [SerializeField] private BoardPosition[] gridRow2 = new BoardPosition[numberColumns];
     [SerializeField] private BoardPosition[] gridRow3 = new BoardPosition[numberColumns];
 
-    public Rigidbody model;
+    // Rotation on click
+    private float rotationForce = 500f;
+    private float angularDrag = 5f;
 
-    private Vector3 initRotation;
+    // Correction lerp
+    private float lerpingThreshold = 5f; // this is the angular velocity value under which we will lerp
+    private float lerpingSpeed = 5f;
+    private Quaternion initialRotationValue;
 
-    private void Awake()
+    // Other effects
+    public TweenShake tweenShake;
+    public ParticleSystem particles11;
+    #endregion
+
+
+    #region Monobehaviour
+    void Awake()
     {
         Director.Instance.board = this;
     }
+
     void Start()
     {
+        initialRotationValue = model.transform.rotation; // save the initial rotation
+        model.angularDrag = angularDrag;
         PopulateBoard();
-        initRotation = transform.rotation.eulerAngles;
     }
 
     void Update()
     {
         CorrectPosition();
     }
+    #endregion
+
 
     private void CorrectPosition()
     {
-
+        if( model.angularVelocity.magnitude < lerpingThreshold )
+        {
+            // If I use Time.time it will lerp faster the longer the game goes on
+            model.transform.rotation = Quaternion.Slerp( model.transform.rotation, initialRotationValue, Time.deltaTime * lerpingSpeed );
+            //Debug.Log( Quaternion.Angle( transform.rotation, originalRotationValue ) );
+            //Debug.Log( GetComponent<Rigidbody>().angularVelocity.magnitude );
+        }
     }
 
     private void PopulateBoard()
@@ -58,58 +84,34 @@ public class Board : MonoBehaviour
     {
         //Debug.Log( string.Format( "We pressed on the position ({0},{1})", row, column ) );
 
-        // Apply torque
-        Vector3 withForce = new Vector3( 0f, 0f, 10f );
-        Debug.Log( string.Format( "Applying torque at position ({0},{1},{2})",
-            transform.localPosition.x, transform.localPosition.y, transform.localPosition.z ) );
-        AddTorqueAtPosition( model, Vector3.one, grid[row, column].transform.localPosition );
+        // Calculate the position
+        Vector3 position = grid[row, column].transform.localPosition * rotationForce;
+        //Debug.Log( string.Format( "Original position ({0},{1},{2})", position.x, position.y, position.z ) );
 
-        switch (row)
-        {
+        // For some reason I have to "rotate" the X and Y axis for it to properly align with the model
+        Vector3 correctedPosition = Quaternion.Euler( 0, 90, 0 ) * position;
+        // Debug.Log( string.Format( "Corrected position ({0},{1},{2})", correctedPosition.x, correctedPosition.y, correctedPosition.z ) );
 
-            default:
-            case 1:
-                if (column == 1)
-                {
-                }
-                break;
-            case 2:
-                break;
-            case 3:
-                break;
-        }
-    }
+        // Apply the torque
+        model.AddTorque( correctedPosition );
 
-    public Vector3 OrthoNormalize( Vector3 vector1, Vector3 vector2 )
-    {
-        vector1.Normalize();
-        Vector3 temp = Vector3.Cross( vector1, vector2 );
-        temp.Normalize();
-        vector2 = Vector3.Cross( temp, vector2 );
-        return vector2;
-        //var output = new Vector3[] {vector1, vector2};
-        //return output;
-    }
+        // Play effects
+        grid[row, column].PlayEffects();
+        tweenShake.Play();
 
-
-    public void AddTorqueAtPosition( Rigidbody thisRigidbody, Vector3 torque, Vector3 position )
-    {
-        //http://forum.unity3d.com/threads/torque-at-offset.187297/
-        Vector3 torqueAxis = torque.normalized;
-        Vector3 ortho = new Vector3( 1, 0, 0 );
-        // prevent torqueAxis and ortho from pointing in the same direction
-        if ((torqueAxis - ortho).sqrMagnitude < float.Epsilon)
-        {
-            ortho = new Vector3( 0, 1, 0 );
-        }
-
-        var orthoNorm = OrthoNormalize( torqueAxis, ortho );
-
-
-        // calculate force
-        Vector3 force = Vector3.Cross( 0.5f * torque, orthoNorm );
-        thisRigidbody.AddForceAtPosition( force, position + orthoNorm );
-        thisRigidbody.AddForceAtPosition( -force, position - orthoNorm );
-
+        // I-ll save this snippet for special considerations
+        //switch (row)
+        //{
+        //    default:
+        //    case 1:
+        //        if (column == 1)
+        //        {
+        //        }
+        //        break;
+        //    case 2:
+        //        break;
+        //    case 3:
+        //        break;
+        //}
     }
 }

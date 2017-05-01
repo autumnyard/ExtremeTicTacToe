@@ -13,8 +13,10 @@ public class BoardPosition : MonoBehaviour
     }
     public Value currentValue { private set; get; }
 
-    public int row { private set; get; }
-    public int column { private set; get; }
+    public int row;// { private set; get; }
+    public int column;// { private set; get; }
+
+    public ParticleSystem particles;
 
     //public delegate void Delegate();
     //public Delegate OnPressed;
@@ -24,12 +26,14 @@ public class BoardPosition : MonoBehaviour
     {
         // Get position
         //row = System.Convert.ToInt32( transform.parent.name );
-        row = int.Parse( transform.parent.name ) - 1;
+        //row = int.Parse( transform.parent.name ) - 1;
         //column = System.Convert.ToInt32( transform.name );
-        column = int.Parse( transform.name ) - 1;
+        //column = int.Parse( transform.name ) - 1;
 
         // And reset
         Set( Value.None );
+
+        particles = GetComponentInChildren<ParticleSystem>();
 
        // Debug.Log( string.Format( "Setting position({0},{1}) with value {2}", row, column, currentValue ) );
     }
@@ -45,4 +49,13 @@ public class BoardPosition : MonoBehaviour
                 Debug.Log( "This is BoardPosition" + name );
     }
     */
+
+
+    public void PlayEffects()
+    {
+        if( particles  != null)
+        {
+            particles.Play();
+        }
+    }
 }
