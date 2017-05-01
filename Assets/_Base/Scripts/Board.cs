@@ -95,6 +95,9 @@ public class Board : MonoBehaviour
         // Apply the torque
         model.AddTorque( correctedPosition );
 
+        // Set grid place
+        grid[row, column].Set( BoardPosition.Value.O );
+
         // Play effects
         grid[row, column].PlayEffects();
         tweenShake.Play();

@@ -16,10 +16,17 @@ public class BoardPosition : MonoBehaviour
     public int row;// { private set; get; }
     public int column;// { private set; get; }
 
-    public ParticleSystem particles;
 
     //public delegate void Delegate();
     //public Delegate OnPressed;
+    public GameObject boardCubePrefab;
+    private GameObject boardCubeInstance;
+    private ParticleSystem particles;
+
+    new private Renderer renderer;
+    public Material materialBase;
+    public Material materialX;
+    public Material materialO;
 
     // Use this for initialization
     void Start()
@@ -30,17 +37,34 @@ public class BoardPosition : MonoBehaviour
         //column = System.Convert.ToInt32( transform.name );
         //column = int.Parse( transform.name ) - 1;
 
-        // And reset
+        // Get components
+
+        boardCubePrefab = Instantiate( boardCubePrefab, transform );
+        particles = GetComponentInChildren<ParticleSystem>();
+        renderer = GetComponentInChildren<Renderer>();
+        // Initialize
         Set( Value.None );
 
-        particles = GetComponentInChildren<ParticleSystem>();
-
-       // Debug.Log( string.Format( "Setting position({0},{1}) with value {2}", row, column, currentValue ) );
+        // Debug.Log( string.Format( "Setting position({0},{1}) with value {2}", row, column, currentValue ) );
     }
 
     public void Set( Value to )
     {
         currentValue = to;
+
+        switch( currentValue )
+        {
+            default:
+            case Value.None:
+                renderer.material = materialBase;
+                break;
+            case Value.X:
+                renderer.material = materialX;
+                break;
+            case Value.O:
+                renderer.material = materialO;
+                break;
+        }
     }
 
     /*
@@ -53,7 +77,7 @@ public class BoardPosition : MonoBehaviour
 
     public void PlayEffects()
     {
-        if( particles  != null)
+        if( particles  != null )
         {
             particles.Play();
         }
