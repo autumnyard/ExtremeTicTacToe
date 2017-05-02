@@ -5,14 +5,14 @@ using UnityEngine;
 public class Board : MonoBehaviour
 {
     #region Variables
-    // Data
+    // Logic
     private const int numberRows = 3;
     private const int numberColumns = 3;
+    public BoardPosition[,] grid;
     // int[,] myArray = new int[4,2];
 
     // Components
     public Rigidbody model;
-    public BoardPosition[,] grid;
     [SerializeField] private BoardPosition[] gridRow1 = new BoardPosition[numberColumns];
     [SerializeField] private BoardPosition[] gridRow2 = new BoardPosition[numberColumns];
     [SerializeField] private BoardPosition[] gridRow3 = new BoardPosition[numberColumns];
@@ -28,7 +28,6 @@ public class Board : MonoBehaviour
 
     // Other effects
     public TweenShake tweenShake;
-    public ParticleSystem particles11;
     #endregion
 
 
@@ -80,7 +79,7 @@ public class Board : MonoBehaviour
         grid[2, 2] = gridRow3[2];
     }
 
-    public void PressOnPosition( int row, int column )
+    public void PressOnPosition( int row, int column, GameManager.Players player )
     {
         //Debug.Log( string.Format( "We pressed on the position ({0},{1})", row, column ) );
 
@@ -96,7 +95,7 @@ public class Board : MonoBehaviour
         model.AddTorque( correctedPosition );
 
         // Set grid place
-        grid[row, column].Set( BoardPosition.Value.O );
+        grid[row, column].Set( player );
 
         // Play effects
         grid[row, column].PlayEffects();

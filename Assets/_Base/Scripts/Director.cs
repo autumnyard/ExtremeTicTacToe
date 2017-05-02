@@ -39,7 +39,7 @@ public class Director : MonoBehaviour
     {
         GameObject obj = GameObject.Find( "Director" );
 
-        if (obj == null)
+        if( obj == null )
         {
             obj = new GameObject( "Director", typeof( Director ) );
         }
@@ -65,7 +65,7 @@ public class Director : MonoBehaviour
 
         //Debug.Log("Change scene to: " + currentScene);
 
-        switch (currentScene)
+        switch( currentScene )
         {
             case Structs.GameScene.Initialization:
                 SwitchToMenu();
@@ -84,7 +84,9 @@ public class Director : MonoBehaviour
                 //InitCamera();
                 //SetCameraOnPlayer();
                 //GameStart();
+                gameManager.StartGame();
                 managerUI.SetPanels();
+                managerUI.SetCurrentPlayer( gameManager.GetCurrentPlayer().ToString() );
                 SwitchToIngame();
                 break;
 
@@ -125,12 +127,23 @@ public class Director : MonoBehaviour
     #endregion
 
 
-    #region Game settings
+    #region Game logic
     public void SetGameSettings( Structs.GameMode gameMode, Structs.GameDifficulty gameDifficulty, Structs.GameView viewMode )
     {
         currentGameMode = gameMode;
         currentGameDifficulty = gameDifficulty;
         currentGameView = viewMode;
+    }
+
+    private void PlayTurn( int row, int column, GameManager.Players player )
+    {
+        // Trigger graphical feedback, info and effects
+        board.PressOnPosition( row, column, gameManager.currentPlayer );
+
+        // Modify game state
+        gameManager.PlayTurn( row, column );
+
+        managerUI.SetCurrentPlayer( gameManager.GetCurrentPlayer().ToString() );
     }
     #endregion
 
@@ -175,38 +188,23 @@ public class Director : MonoBehaviour
     #region Input
     public void MouseClick()
     {
-        
         Ray ray = Camera.main.ScreenPointToRay( Input.mousePosition );
         RaycastHit hit;
 
-        if (Physics.Raycast( ray, out hit, 100 ))
+        if( Physics.Raycast( ray, out hit, 100 ) )
         {
             Transform thingie = hit.collider.transform;
-            if (thingie.CompareTag( "BoardPosition" ))
+            if( thingie.CompareTag( "BoardPosition" ) )
             {
                 BoardPosition pos = thingie.GetComponent<BoardPosition>();
                 //Debug.Log( "This is BoardPosition " + pos.transform.name );
-                board.PressOnPosition( pos.row, pos.column );
+                PlayTurn( pos.row, pos.column, gameManager.currentPlayer );
             }
-            else
-            {
-                Debug.Log( "This isn't a BoardPosition:"+ hit.transform.name );
-            }
+            //else
+            //{
+            //    Debug.Log( "This isn't a BoardPosition:"+ hit.transform.name );
+            //}
         }
-        
-
-
-        //Ray ray = Camera.main.ScreenPointToRay( Input.mousePosition );
-        //RaycastHit hit;
-        //if (Physics.Raycast( ray, out hit, 100 ))
-        //{
-        //    Debug.DrawLine( ray.origin, hit.point );
-        //    Debug.Log( "Hit object: " + hit.collider.gameObject.name );
-        //}
     }
-    //public void DebugHurtPlayer()
-    //{
-    //    managerEntity.playersScript[0].Hurt();
-    //}
     #endregion
 }

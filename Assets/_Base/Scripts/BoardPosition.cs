@@ -4,14 +4,7 @@ using UnityEngine;
 
 public class BoardPosition : MonoBehaviour
 {
-
-    public enum Value
-    {
-        None,
-        O,
-        X
-    }
-    public Value currentValue { private set; get; }
+    public GameManager.Players currentValue { private set; get; }
 
     public int row;// { private set; get; }
     public int column;// { private set; get; }
@@ -43,25 +36,25 @@ public class BoardPosition : MonoBehaviour
         particles = GetComponentInChildren<ParticleSystem>();
         renderer = GetComponentInChildren<Renderer>();
         // Initialize
-        Set( Value.None );
+        Set( GameManager.Players.None );
 
         // Debug.Log( string.Format( "Setting position({0},{1}) with value {2}", row, column, currentValue ) );
     }
 
-    public void Set( Value to )
+    public void Set( GameManager.Players to )
     {
         currentValue = to;
 
         switch( currentValue )
         {
             default:
-            case Value.None:
+            case GameManager.Players.None:
                 renderer.material = materialBase;
                 break;
-            case Value.X:
+            case GameManager.Players.X:
                 renderer.material = materialX;
                 break;
-            case Value.O:
+            case GameManager.Players.O:
                 renderer.material = materialO;
                 break;
         }

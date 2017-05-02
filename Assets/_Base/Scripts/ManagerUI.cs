@@ -4,7 +4,7 @@ using UnityEngine;
 
 public class ManagerUI : MonoBehaviour
 {
-    [Header("Components"), SerializeField]
+    [Header( "Components" ), SerializeField]
     private PanelBase panelMenu;
     [SerializeField]
     private PanelBase panelHUD;
@@ -12,7 +12,7 @@ public class ManagerUI : MonoBehaviour
     private PanelBase panelLoading;
 
     // Panel HUD
-    [Header("Ingame HUD"), SerializeField] private UnityEngine.UI.Text health;
+    [Header( "Ingame HUD" ), SerializeField] private UnityEngine.UI.Text currentPlayer;
     [SerializeField] private UnityEngine.UI.Text mana;
     [SerializeField] private UnityEngine.UI.Text score;
     [SerializeField] private UnityEngine.UI.Text enemycount;
@@ -24,7 +24,7 @@ public class ManagerUI : MonoBehaviour
 
     private void Update()
     {
-        if (Director.Instance.currentScene == Structs.GameScene.Ingame)
+        if( Director.Instance.currentScene == Structs.GameScene.Ingame )
         {
 
         }
@@ -33,7 +33,7 @@ public class ManagerUI : MonoBehaviour
     #region Panel management
     public void SetPanels()
     {
-        switch (Director.Instance.currentScene)
+        switch( Director.Instance.currentScene )
         {
             case Structs.GameScene.Menu:
                 panelMenu.Show();
@@ -62,17 +62,10 @@ public class ManagerUI : MonoBehaviour
     }
     #endregion
 
-    #region Inagem HUD management
-    public void SetHealth(int newHealth)
+    #region Ingame HUD management
+    public void SetCurrentPlayer( string to )
     {
-        if (newHealth < 0)
-        {
-            health.text = "Health: --";
-        }
-        else
-        {
-            health.text = "Health: " + newHealth.ToString("00");
-        }
+        currentPlayer.text = "Current Player: " + to;
     }
     #endregion
 }
