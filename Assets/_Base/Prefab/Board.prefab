@@ -972,7 +972,6 @@ MonoBehaviour:
   - {fileID: 114807400352508352}
   - {fileID: 114782335026419288}
   tweenShake: {fileID: 114360747161910136}
-  particles11: {fileID: 0}
 --- !u!114 &114360271472193028
 MonoBehaviour:
   m_ObjectHideFlags: 1

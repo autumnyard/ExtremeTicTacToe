@@ -13,9 +13,9 @@ public class ManagerUI : MonoBehaviour
 
     // Panel HUD
     [Header( "Ingame HUD" ), SerializeField] private UnityEngine.UI.Text currentPlayer;
-    [SerializeField] private UnityEngine.UI.Text mana;
-    [SerializeField] private UnityEngine.UI.Text score;
-    [SerializeField] private UnityEngine.UI.Text enemycount;
+    [SerializeField] private UnityEngine.UI.Text winner;
+    //[SerializeField] private UnityEngine.UI.Text score;
+    //[SerializeField] private UnityEngine.UI.Text enemycount;
 
     void Awake()
     {
@@ -66,6 +66,10 @@ public class ManagerUI : MonoBehaviour
     public void SetCurrentPlayer( string to )
     {
         currentPlayer.text = "Current Player: " + to;
+    }
+    public void SetWinner( string to )
+    {
+        winner.text = "Winner: " + to;
     }
     #endregion
 }

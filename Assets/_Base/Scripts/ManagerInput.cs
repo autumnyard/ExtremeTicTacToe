@@ -193,8 +193,6 @@ public class ManagerInput : MonoBehaviour
     #region Public
     public void SetEvents()
     {
-        //UnbindAllEverything( ref OnMouse );
-        //UnbindAllEverything( ref OnKeyboard );
         UnbindAll( ref OnMouse );
         UnbindAll( ref OnKeyboard );
 
@@ -210,16 +208,7 @@ public class ManagerInput : MonoBehaviour
 
             case Structs.GameScene.Ingame:
                 // TODO: Descomentar todo esto!
-                Bind( ref OnKeyboard[(int)MyKeyboard.Escape], Director.Instance.GameEnd );
                 Bind( ref OnMouse[(int)MyMouse.Left], Director.Instance.MouseClick );
-                //Bind( ref OnKeyboard[(int)MyKeyboard.W], Director.Instance.managerEntity.playersScript[0].MoveUp );
-                //Bind( ref OnKeyboard[(int)MyKeyboard.S], Director.Instance.managerEntity.playersScript[0].MoveDown );
-                //Bind( ref OnKeyboard[(int)MyKeyboard.A], Director.Instance.managerEntity.playersScript[0].MoveLeft );
-                //Bind( ref OnKeyboard[(int)MyKeyboard.D], Director.Instance.managerEntity.playersScript[0].MoveRight );
-                //Bind(ref OnKeyboard[(int)MyKeyboard.Space], Director.Instance.PlayerJump);
-                //Bind(ref OnKeyboard[(int)MyKeyboard.Enter], Director.Instance.GenerateEnemy);
-                //Bind(ref OnKeyboard[(int)MyKeyboard.ArrowLeft], Director.Instance.MapPrevious);
-                //Bind(ref OnKeyboard[(int)MyKeyboard.ArrowRight], Director.Instance.MapNext);
                 break;
         }
     }

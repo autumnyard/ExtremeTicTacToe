@@ -41,7 +41,6 @@ public class Board : MonoBehaviour
     {
         initialRotationValue = model.transform.rotation; // save the initial rotation
         model.angularDrag = angularDrag;
-        PopulateBoard();
     }
 
     void Update()
@@ -50,6 +49,11 @@ public class Board : MonoBehaviour
     }
     #endregion
 
+    public void Reset()
+    {
+        PopulateBoard();
+
+    }
 
     private void CorrectPosition()
     {
@@ -77,6 +81,14 @@ public class Board : MonoBehaviour
         grid[2, 0] = gridRow3[0];
         grid[2, 1] = gridRow3[1];
         grid[2, 2] = gridRow3[2];
+
+        for( int i = 0; i < numberRows; i++ )
+        {
+            for( int j = 0; j < numberColumns; j++ )
+            {
+                grid[i, j].Set( GameManager.Players.None );
+            }
+        }
     }
 
     public void PressOnPosition( int row, int column, GameManager.Players player )

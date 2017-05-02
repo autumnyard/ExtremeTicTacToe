@@ -108,6 +108,12 @@ NavMeshSettings:
     tileSize: 256
     accuratePlacement: 0
   m_NavMeshData: {fileID: 0}
+--- !u!114 &161749575 stripped
+MonoBehaviour:
+  m_PrefabParentObject: {fileID: 114486947180764996, guid: 171d6d6b19861854db9574095914e4ac,
+    type: 2}
+  m_PrefabInternal: {fileID: 1330424302}
+  m_Script: {fileID: 708705254, guid: f5f67c52d1564df4a8936ccd202a3bd8, type: 3}
 --- !u!1 &542278501
 GameObject:
   m_ObjectHideFlags: 0
@@ -315,6 +321,19 @@ Prefab:
       propertyPath: m_Pivot.y
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 1690912716234550, guid: 171d6d6b19861854db9574095914e4ac, type: 2}
+      propertyPath: m_Name
+      value: Winner
+      objectReference: {fileID: 0}
+    - target: {fileID: 114486947180764996, guid: 171d6d6b19861854db9574095914e4ac,
+        type: 2}
+      propertyPath: m_Text
+      value: 'Winner:'
+      objectReference: {fileID: 0}
+    - target: {fileID: 1690912716234550, guid: 171d6d6b19861854db9574095914e4ac, type: 2}
+      propertyPath: m_IsActive
+      value: 1
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 100100000, guid: 171d6d6b19861854db9574095914e4ac, type: 2}
   m_IsPrefabParent: 0
@@ -374,14 +393,14 @@ Prefab:
       objectReference: {fileID: 2015810202}
     - target: {fileID: 114172686426489652, guid: f1cc425a8888a8747bcca5a2126098c0,
         type: 2}
-      propertyPath: health
+      propertyPath: currentPlayer
       value: 
       objectReference: {fileID: 1196997629}
     - target: {fileID: 114172686426489652, guid: f1cc425a8888a8747bcca5a2126098c0,
         type: 2}
-      propertyPath: currentPlayer
+      propertyPath: winner
       value: 
-      objectReference: {fileID: 1196997629}
+      objectReference: {fileID: 161749575}
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 100100000, guid: f1cc425a8888a8747bcca5a2126098c0, type: 2}
   m_IsPrefabParent: 0

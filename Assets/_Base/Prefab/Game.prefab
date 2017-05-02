@@ -56,10 +56,8 @@ MonoBehaviour:
   panelMenu: {fileID: 0}
   panelHUD: {fileID: 0}
   panelLoading: {fileID: 0}
-  health: {fileID: 0}
-  mana: {fileID: 0}
-  score: {fileID: 0}
-  enemycount: {fileID: 0}
+  currentPlayer: {fileID: 0}
+  winner: {fileID: 0}
 --- !u!114 &114549601424375212
 MonoBehaviour:
   m_ObjectHideFlags: 1

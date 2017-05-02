@@ -84,6 +84,7 @@ public class Director : MonoBehaviour
                 //InitCamera();
                 //SetCameraOnPlayer();
                 //GameStart();
+                board.Reset();
                 gameManager.StartGame();
                 managerUI.SetPanels();
                 managerUI.SetCurrentPlayer( gameManager.GetCurrentPlayer().ToString() );
@@ -100,10 +101,8 @@ public class Director : MonoBehaviour
                 //managerCamera.cameras[0].Set( CameraHelper.Type.Follow, managerEntity.playersScript[0].transform );
                 //managerCamera.cameras[0].Set( CameraHelper.Type.FixedAxis, managerEntity.playersScript[0].transform, true, 0f );
 
-                //if (managerEntity.playersScript[0] != null)
-                //{
-                //    managerEntity.playersScript[0].OnDie += GameEnd;
-                //}
+                gameManager.OnEndGame += GameEnd;
+
 
                 managerInput.SetEvents();
                 managerUI.SetPanels();
@@ -113,6 +112,12 @@ public class Director : MonoBehaviour
                 //managerEntity.playersScript[0].OnDie -= GameEnd;
                 //managerEntity.Reset();
                 //managerMap.Reset();
+                gameManager.OnEndGame -= GameEnd;
+                board.Reset();
+                gameManager.ResetGame();
+                managerUI.SetCurrentPlayer( GameManager.Players.None.ToString() );
+                managerUI.SetWinner( gameManager.GetCurrentPlayer().ToString() );
+
                 managerInput.SetEvents();
                 managerUI.SetPanels();
                 SwitchToMenu();
@@ -145,6 +150,7 @@ public class Director : MonoBehaviour
 
         managerUI.SetCurrentPlayer( gameManager.GetCurrentPlayer().ToString() );
     }
+
     #endregion
 
 
@@ -172,8 +178,10 @@ public class Director : MonoBehaviour
         ChangeScene( Structs.GameScene.Ingame );
     }
 
-    public void GameEnd()
+    public void GameEnd( GameManager.Players winner )
     {
+        managerUI.SetWinner( winner.ToString() );
+
         ChangeScene( Structs.GameScene.GameEnd );
     }
 
