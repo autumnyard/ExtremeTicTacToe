@@ -10,6 +10,8 @@ public class ManagerUI : MonoBehaviour
     private PanelBase panelHUD;
     [SerializeField]
     private PanelBase panelLoading;
+    [SerializeField]
+    private PanelBase panelScore;
 
     // Panel HUD
     [Header( "Ingame HUD" ), SerializeField] private UnityEngine.UI.Text currentPlayer;
@@ -39,24 +41,35 @@ public class ManagerUI : MonoBehaviour
                 panelMenu.Show();
                 panelHUD.Hide();
                 panelLoading.Hide();
+                panelScore.Hide();
                 break;
 
             case Structs.GameScene.Ingame:
                 panelMenu.Hide();
                 panelHUD.Show();
                 panelLoading.Hide();
+                panelScore.Hide();
+                break;
+
+            case Structs.GameScene.Score:
+                panelMenu.Show();
+                panelHUD.Hide();
+                panelLoading.Hide();
+                panelScore.Show();
                 break;
 
             case Structs.GameScene.LoadingGame:
                 panelMenu.Hide();
                 panelHUD.Hide();
                 panelLoading.Show();
+                panelScore.Hide();
                 break;
 
-            default:
+            default: // Error!!
                 panelMenu.Hide();
                 panelHUD.Hide();
-                panelLoading.Hide();
+                panelLoading.Show();
+                panelScore.Hide();
                 break;
         }
     }
@@ -67,9 +80,35 @@ public class ManagerUI : MonoBehaviour
     {
         currentPlayer.text = "Current Player: " + to;
     }
-    public void SetWinner( string to )
+
+    public void SetWinner( GameManager.Players to )
     {
-        winner.text = "Winner: " + to;
+        if( to == GameManager.Players.None )
+        {
+            winner.text = "Winner: Draw";
+        }
+        else
+        {
+            winner.text = "Winner: " + to.ToString();
+        }
+    }
+    #endregion
+
+
+    #region Buttons
+    public void ButtonPlay()
+    {
+        Director.Instance.GameBegin();
+    }
+
+    public void ButtonGameEnd()
+    {
+        Director.Instance.GameEnd( GameManager.Players.None );
+    }
+
+    public void ButtonExit()
+    {
+        Director.Instance.Exit();
     }
     #endregion
 }

@@ -199,15 +199,17 @@ public class ManagerInput : MonoBehaviour
         switch (Director.Instance.currentScene)
         {
             case Structs.GameScene.Menu:
-                Bind( ref OnKeyboard[(int)MyKeyboard.Enter], Director.Instance.GameBegin );
-                Bind( ref OnKeyboard[(int)MyKeyboard.Space], Director.Instance.GameBegin );
-                Bind( ref OnKeyboard[(int)MyKeyboard.E], Director.Instance.GameBegin );
-                Bind( ref OnKeyboard[(int)MyKeyboard.Q], Director.Instance.GameBegin );
-                Bind( ref OnKeyboard[(int)MyKeyboard.Escape], Director.Instance.Exit );
+            case Structs.GameScene.Score:
+                Bind( ref OnKeyboard[(int)MyKeyboard.Enter], Director.Instance.managerUI.ButtonPlay );
+                Bind( ref OnKeyboard[(int)MyKeyboard.E], Director.Instance.managerUI.ButtonPlay );
+                Bind( ref OnKeyboard[(int)MyKeyboard.Space], Director.Instance.managerUI.ButtonPlay );
+                Bind( ref OnKeyboard[(int)MyKeyboard.Q], Director.Instance.managerUI.ButtonExit );
+                Bind( ref OnKeyboard[(int)MyKeyboard.Escape], Director.Instance.managerUI.ButtonExit );
                 break;
 
             case Structs.GameScene.Ingame:
-                // TODO: Descomentar todo esto!
+                Bind( ref OnKeyboard[(int)MyKeyboard.Escape], Director.Instance.managerUI.ButtonGameEnd );
+
                 Bind( ref OnMouse[(int)MyMouse.Left], Director.Instance.MouseClick );
                 break;
         }

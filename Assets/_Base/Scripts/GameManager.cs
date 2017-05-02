@@ -155,7 +155,7 @@ public class GameManager : MonoBehaviour
             lastPlayerWhoBegan = Players.O;
         }
 
-        //Debug.Log( "Begin the game with player: "+ currentPlayer.ToString() );
+       Debug.Log( "Begin the game with player: "+ currentPlayer.ToString() );
     }
 
     public Players PlayTurn( int row, int column )
@@ -180,9 +180,9 @@ public class GameManager : MonoBehaviour
         return currentPlayer;
     }
 
-    public void ResetGame()
-    {
-        StartGame();
-    }
+    //public void ResetGame()
+    //{
+    //    StartGame();
+    //}
     #endregion
 }

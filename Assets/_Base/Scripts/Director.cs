@@ -7,7 +7,7 @@ public class Director : MonoBehaviour
 
     #region Variables
     public GameManager gameManager;
-    //public ManagerCamera managerCamera;
+    public ManagerCamera managerCamera;
     //public Player player;
     //public ManagerMap managerMap;
     //public ManagerEntity managerEntity;
@@ -77,30 +77,17 @@ public class Director : MonoBehaviour
                 break;
 
             case Structs.GameScene.LoadingGame:
-                //InitMap();
-                //entityManager.Init();
-                //GameInitialize();
-                //InitPlayer();
-                //InitCamera();
-                //SetCameraOnPlayer();
-                //GameStart();
                 board.Reset();
                 gameManager.StartGame();
                 managerUI.SetPanels();
                 managerUI.SetCurrentPlayer( gameManager.GetCurrentPlayer().ToString() );
+                managerCamera.SwitchToCamera( ManagerCamera.Cameras.Static );
+
+                // And go!
                 SwitchToIngame();
                 break;
 
             case Structs.GameScene.Ingame:
-                //inputManager.SetEvents();
-                //uiManager.UpdateUI();
-                //managerMap.SummonMap();
-                //managerEntity.SummonPlayer( 0, Vector2.zero );
-
-                // Set camera
-                //managerCamera.cameras[0].Set( CameraHelper.Type.Follow, managerEntity.playersScript[0].transform );
-                //managerCamera.cameras[0].Set( CameraHelper.Type.FixedAxis, managerEntity.playersScript[0].transform, true, 0f );
-
                 gameManager.OnEndGame += GameEnd;
 
 
@@ -109,18 +96,18 @@ public class Director : MonoBehaviour
                 break;
 
             case Structs.GameScene.GameEnd:
-                //managerEntity.playersScript[0].OnDie -= GameEnd;
-                //managerEntity.Reset();
-                //managerMap.Reset();
                 gameManager.OnEndGame -= GameEnd;
-                board.Reset();
-                gameManager.ResetGame();
+                managerCamera.SwitchToCamera( ManagerCamera.Cameras.Motion );
+                //gameManager.ResetGame(); // not necessary
                 managerUI.SetCurrentPlayer( GameManager.Players.None.ToString() );
-                managerUI.SetWinner( gameManager.GetCurrentPlayer().ToString() );
+                //managerUI.SetWinner( gameManager.GetCurrentPlayer().ToString() );
 
+                SwitchToScore();
+                break;
+
+            case Structs.GameScene.Score:
                 managerInput.SetEvents();
                 managerUI.SetPanels();
-                SwitchToMenu();
                 break;
 
             case Structs.GameScene.Exit:
@@ -180,9 +167,15 @@ public class Director : MonoBehaviour
 
     public void GameEnd( GameManager.Players winner )
     {
-        managerUI.SetWinner( winner.ToString() );
+        managerUI.SetWinner( winner );
 
         ChangeScene( Structs.GameScene.GameEnd );
+    }
+
+    // This is automatic
+    private void SwitchToScore()
+    {
+        ChangeScene( Structs.GameScene.Score );
     }
 
     public void Exit()

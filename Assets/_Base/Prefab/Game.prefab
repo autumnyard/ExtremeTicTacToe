@@ -22,6 +22,7 @@ GameObject:
   - component: {fileID: 114759879168991052}
   - component: {fileID: 114549601424375212}
   - component: {fileID: 114172686426489652}
+  - component: {fileID: 114237308813908008}
   m_Layer: 0
   m_Name: Game
   m_TagString: Untagged
@@ -56,8 +57,23 @@ MonoBehaviour:
   panelMenu: {fileID: 0}
   panelHUD: {fileID: 0}
   panelLoading: {fileID: 0}
+  panelScore: {fileID: 0}
   currentPlayer: {fileID: 0}
   winner: {fileID: 0}
+--- !u!114 &114237308813908008
+MonoBehaviour:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 1971200768305228}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 4c7f358f8b6e56c4eb7ddc792813e404, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  cameras:
+  - {fileID: 0}
+  - {fileID: 0}
 --- !u!114 &114549601424375212
 MonoBehaviour:
   m_ObjectHideFlags: 1

@@ -27,7 +27,12 @@ public class Board : MonoBehaviour
     private Quaternion initialRotationValue;
 
     // Other effects
-    public TweenShake tweenShake;
+    private TweenShake tweenShake;
+
+    // Sound effects
+    private AudioSource audioSource;
+    [SerializeField] private AudioClip[] sfxExplosion;
+
     #endregion
 
 
@@ -41,6 +46,8 @@ public class Board : MonoBehaviour
     {
         initialRotationValue = model.transform.rotation; // save the initial rotation
         model.angularDrag = angularDrag;
+        tweenShake = GetComponent<TweenShake>();
+        audioSource = GetComponent<AudioSource>();
     }
 
     void Update()
@@ -49,11 +56,8 @@ public class Board : MonoBehaviour
     }
     #endregion
 
-    public void Reset()
-    {
-        PopulateBoard();
 
-    }
+    #region Private
 
     private void CorrectPosition()
     {
@@ -91,6 +95,20 @@ public class Board : MonoBehaviour
         }
     }
 
+    private void PlaySoundExplosion()
+    {
+        audioSource.clip = sfxExplosion[Random.Range( 0, sfxExplosion.Length )];
+        audioSource.Play();
+    }
+    #endregion
+
+    #region Public
+    public void Reset()
+    {
+        PopulateBoard();
+
+    }
+
     public void PressOnPosition( int row, int column, GameManager.Players player )
     {
         //Debug.Log( string.Format( "We pressed on the position ({0},{1})", row, column ) );
@@ -110,6 +128,7 @@ public class Board : MonoBehaviour
         grid[row, column].Set( player );
 
         // Play effects
+        PlaySoundExplosion();
         grid[row, column].PlayEffects();
         tweenShake.Play();
 
@@ -128,4 +147,5 @@ public class Board : MonoBehaviour
         //        break;
         //}
     }
+    #endregion
 }
