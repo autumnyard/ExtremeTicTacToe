@@ -50,7 +50,9 @@ public class CircularMotion3D : MonoBehaviour
         }
         transform.position = center + offset;
 
-
-        transform.LookAt( target );
+        if( target  != null )
+        {
+            transform.LookAt( target );
+        }
     }
 }

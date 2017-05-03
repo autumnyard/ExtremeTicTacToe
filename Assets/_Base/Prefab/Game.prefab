@@ -73,6 +73,8 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   cameras:
   - {fileID: 0}
+  camerasT:
+  - {fileID: 0}
   - {fileID: 0}
 --- !u!114 &114549601424375212
 MonoBehaviour:

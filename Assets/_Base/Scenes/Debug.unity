@@ -108,6 +108,48 @@ NavMeshSettings:
     tileSize: 256
     accuratePlacement: 0
   m_NavMeshData: {fileID: 0}
+--- !u!1001 &490430139
+Prefab:
+  m_ObjectHideFlags: 0
+  serializedVersion: 2
+  m_Modification:
+    m_TransformParent: {fileID: 0}
+    m_Modifications:
+    - target: {fileID: 4094073228421020, guid: c4ac0ff90f6c3ee4faee7b67c14edafc, type: 2}
+      propertyPath: m_LocalPosition.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 4094073228421020, guid: c4ac0ff90f6c3ee4faee7b67c14edafc, type: 2}
+      propertyPath: m_LocalPosition.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 4094073228421020, guid: c4ac0ff90f6c3ee4faee7b67c14edafc, type: 2}
+      propertyPath: m_LocalPosition.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 4094073228421020, guid: c4ac0ff90f6c3ee4faee7b67c14edafc, type: 2}
+      propertyPath: m_LocalRotation.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 4094073228421020, guid: c4ac0ff90f6c3ee4faee7b67c14edafc, type: 2}
+      propertyPath: m_LocalRotation.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 4094073228421020, guid: c4ac0ff90f6c3ee4faee7b67c14edafc, type: 2}
+      propertyPath: m_LocalRotation.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 4094073228421020, guid: c4ac0ff90f6c3ee4faee7b67c14edafc, type: 2}
+      propertyPath: m_LocalRotation.w
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 4094073228421020, guid: c4ac0ff90f6c3ee4faee7b67c14edafc, type: 2}
+      propertyPath: m_RootOrder
+      value: 1
+      objectReference: {fileID: 0}
+    m_RemovedComponents: []
+  m_ParentPrefab: {fileID: 100100000, guid: c4ac0ff90f6c3ee4faee7b67c14edafc, type: 2}
+  m_IsPrefabParent: 0
 --- !u!1 &542278501
 GameObject:
   m_ObjectHideFlags: 0
@@ -170,59 +212,17 @@ Transform:
   m_Father: {fileID: 0}
   m_RootOrder: 2
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!1001 &610154378
-Prefab:
-  m_ObjectHideFlags: 0
-  serializedVersion: 2
-  m_Modification:
-    m_TransformParent: {fileID: 0}
-    m_Modifications:
-    - target: {fileID: 4094073228421020, guid: c4ac0ff90f6c3ee4faee7b67c14edafc, type: 2}
-      propertyPath: m_LocalPosition.x
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 4094073228421020, guid: c4ac0ff90f6c3ee4faee7b67c14edafc, type: 2}
-      propertyPath: m_LocalPosition.y
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 4094073228421020, guid: c4ac0ff90f6c3ee4faee7b67c14edafc, type: 2}
-      propertyPath: m_LocalPosition.z
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 4094073228421020, guid: c4ac0ff90f6c3ee4faee7b67c14edafc, type: 2}
-      propertyPath: m_LocalRotation.x
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 4094073228421020, guid: c4ac0ff90f6c3ee4faee7b67c14edafc, type: 2}
-      propertyPath: m_LocalRotation.y
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 4094073228421020, guid: c4ac0ff90f6c3ee4faee7b67c14edafc, type: 2}
-      propertyPath: m_LocalRotation.z
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 4094073228421020, guid: c4ac0ff90f6c3ee4faee7b67c14edafc, type: 2}
-      propertyPath: m_LocalRotation.w
-      value: 1
-      objectReference: {fileID: 0}
-    - target: {fileID: 4094073228421020, guid: c4ac0ff90f6c3ee4faee7b67c14edafc, type: 2}
-      propertyPath: m_RootOrder
-      value: 1
-      objectReference: {fileID: 0}
-    m_RemovedComponents: []
-  m_ParentPrefab: {fileID: 100100000, guid: c4ac0ff90f6c3ee4faee7b67c14edafc, type: 2}
-  m_IsPrefabParent: 0
+--- !u!4 &647699872 stripped
+Transform:
+  m_PrefabParentObject: {fileID: 4485067099420660, guid: c4ac0ff90f6c3ee4faee7b67c14edafc,
+    type: 2}
+  m_PrefabInternal: {fileID: 490430139}
 --- !u!114 &760867505 stripped
 MonoBehaviour:
   m_PrefabParentObject: {fileID: 114280085047330452, guid: 171d6d6b19861854db9574095914e4ac,
     type: 2}
   m_PrefabInternal: {fileID: 1330424302}
   m_Script: {fileID: 11500000, guid: ca6bd282a654bc04ab25faad09abc6c8, type: 3}
---- !u!20 &1046244486 stripped
-Camera:
-  m_PrefabParentObject: {fileID: 20833517811282000, guid: c4ac0ff90f6c3ee4faee7b67c14edafc,
-    type: 2}
-  m_PrefabInternal: {fileID: 610154378}
 --- !u!114 &1196997629 stripped
 MonoBehaviour:
   m_PrefabParentObject: {fileID: 114233726302211360, guid: 171d6d6b19861854db9574095914e4ac,
@@ -388,12 +388,17 @@ Prefab:
         type: 2}
       propertyPath: cameras.Array.data[0]
       value: 
-      objectReference: {fileID: 1046244486}
+      objectReference: {fileID: 1651531520}
     - target: {fileID: 114237308813908008, guid: f1cc425a8888a8747bcca5a2126098c0,
         type: 2}
-      propertyPath: cameras.Array.data[1]
+      propertyPath: camerasT.Array.data[0]
       value: 
-      objectReference: {fileID: 1651531520}
+      objectReference: {fileID: 647699872}
+    - target: {fileID: 114237308813908008, guid: f1cc425a8888a8747bcca5a2126098c0,
+        type: 2}
+      propertyPath: camerasT.Array.data[1]
+      value: 
+      objectReference: {fileID: 1545509470}
     - target: {fileID: 114172686426489652, guid: f1cc425a8888a8747bcca5a2126098c0,
         type: 2}
       propertyPath: panelMenu
@@ -433,11 +438,16 @@ MonoBehaviour:
     type: 2}
   m_PrefabInternal: {fileID: 1330424302}
   m_Script: {fileID: 11500000, guid: ca6bd282a654bc04ab25faad09abc6c8, type: 3}
+--- !u!4 &1545509470 stripped
+Transform:
+  m_PrefabParentObject: {fileID: 4262031154000446, guid: c4ac0ff90f6c3ee4faee7b67c14edafc,
+    type: 2}
+  m_PrefabInternal: {fileID: 490430139}
 --- !u!20 &1651531520 stripped
 Camera:
   m_PrefabParentObject: {fileID: 20530094605766040, guid: c4ac0ff90f6c3ee4faee7b67c14edafc,
     type: 2}
-  m_PrefabInternal: {fileID: 610154378}
+  m_PrefabInternal: {fileID: 490430139}
 --- !u!114 &1957381899 stripped
 MonoBehaviour:
   m_PrefabParentObject: {fileID: 114672263696933880, guid: 171d6d6b19861854db9574095914e4ac,
