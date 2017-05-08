@@ -1162,6 +1162,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   playOnStart: 0
+  debug: 0
   time: 0.3
   strength: {x: 0.1, y: 0, z: 0.1}
   vibrato: 70
@@ -1207,6 +1208,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   playOnStart: 1
+  debug: 0
   positionShift: {x: 0, y: -0.2, z: 0}
   time: 2
   ease: 4

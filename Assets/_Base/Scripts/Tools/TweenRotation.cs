@@ -1,9 +1,8 @@
 ﻿using UnityEngine;
 using DG.Tweening;
 
-public class TweenRotation : MonoBehaviour
+public class TweenRotation : TweenBase
 {
-    public bool playOnStart = true;
     public float rotationInit = -20f;
     public float rotationFinish = 20f;
     public float time = 1f;
@@ -11,18 +10,10 @@ public class TweenRotation : MonoBehaviour
     public bool loop = false;
     public LoopType loopType;
 
-    // Use this for initialization
-    void Start()
-    {
-        if (playOnStart)
-        {
-            Play();
-        }
-    }
 
-
-    public void Play()
+    public override void Play()
     {
+        if( debug ) Debug.Log( "Play on TweenRotation: "+name );
         int loops = (loop) ? -1 : 0;
         // if (rotationInit != -1)
         {

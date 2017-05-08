@@ -27,7 +27,7 @@ public class Board : MonoBehaviour
     private Quaternion initialRotationValue;
 
     // Other effects
-    private TweenShake tweenShake;
+    private TweenBase tweenShake;
 
     // Sound effects
     private AudioSource audioSource;
