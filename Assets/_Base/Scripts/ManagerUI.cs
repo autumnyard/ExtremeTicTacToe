@@ -16,8 +16,8 @@ public class ManagerUI : MonoBehaviour
     // Panel HUD
     [Header( "Ingame HUD" ), SerializeField] private UnityEngine.UI.Text currentPlayer;
     [SerializeField] private UnityEngine.UI.Text winner;
-    //[SerializeField] private UnityEngine.UI.Text score;
-    //[SerializeField] private UnityEngine.UI.Text enemycount;
+    [SerializeField] private UnityEngine.UI.Text countXWins;
+    [SerializeField] private UnityEngine.UI.Text countOWins;
 
     void Awake()
     {
@@ -81,7 +81,7 @@ public class ManagerUI : MonoBehaviour
         currentPlayer.text = "Current Player: " + to;
     }
 
-    public void SetWinner( GameManager.Players to )
+    public void SetWinner( GameManager.Players to, int countXwins, int countOwins)
     {
         if( to == GameManager.Players.None )
         {
@@ -91,6 +91,11 @@ public class ManagerUI : MonoBehaviour
         {
             winner.text = "Winner: " + to.ToString();
         }
+
+        // Set counter
+        countXWins.text = "X: " + countXwins + " wins";
+        countOWins.text = "O: " + countOwins + " wins";
+
     }
     #endregion
 

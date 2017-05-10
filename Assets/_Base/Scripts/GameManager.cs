@@ -5,19 +5,27 @@ using UnityEngine;
 public class GameManager : MonoBehaviour
 {
     #region Variables
-    public enum Players
-    {
-        None,
-        O,
-        X
-    }
-    //public Players currentPlayer;
-    public Players currentPlayer; //  false 0,  true 1
-    private Players lastPlayerWhoBegan;
-
+    // Board management
+    [SerializeField] private Board board;
     private const int numberRows = 3;
     private const int numberColumns = 3;
-    public Players[,] grid;
+    private Players[,] grid;
+
+    // Player management
+    public enum Players
+    {
+        None = 0,
+        O,
+        X,
+        MaxValues
+    }
+    [SerializeField] private Players currentPlayer; //  false 0,  true 1
+    [SerializeField] private Players lastPlayerWhoBegan;
+
+    // Winner count
+    [SerializeField] private int[] winnerCount = new int[(int)Players.MaxValues];
+
+
 
     public delegate void Delegate( Players winner );
     public Delegate OnEndGame;
@@ -129,10 +137,18 @@ public class GameManager : MonoBehaviour
     private void EndGame( Players which )
     {
         Debug.Log( "Finished game, winner is: " + which );
+        // Add to count
+        winnerCount[(int)which]++;
+        UpdateUIWithWinner();
 
         if( OnEndGame != null )
         {
+
             OnEndGame( which );
+        }
+        else
+        {
+            Debug.LogError( "Couldn't finish game properly. FATAL ERROR." );
         }
     }
     #endregion
@@ -141,8 +157,6 @@ public class GameManager : MonoBehaviour
     #region Public
     public void StartGame()
     {
-        ResetGrid();
-
         // If this is the first game, X begins
         if( lastPlayerWhoBegan == Players.None || lastPlayerWhoBegan == Players.O )
         {
@@ -155,10 +169,21 @@ public class GameManager : MonoBehaviour
             lastPlayerWhoBegan = Players.O;
         }
 
-       Debug.Log( "Begin the game with player: "+ currentPlayer.ToString() );
+        // Set UI with player who will begin
+        UpdateUIWithCurrentPlayer();
     }
 
-    public Players PlayTurn( int row, int column )
+    public void PlayTurn( int row, int column )
+    {
+        // Trigger graphical feedback, info and effects
+        board.PressOnPosition( row, column, currentPlayer );
+
+        // Modify game state
+        PassTurn( row, column );
+
+    }
+
+    private Players PassTurn( int row, int column )
     {
         grid[row, column] = currentPlayer;
 
@@ -171,18 +196,28 @@ public class GameManager : MonoBehaviour
         // Change to other player
         SwitchPlayer();
 
+        UpdateUIWithCurrentPlayer();
+
         // And return the player who just played
         return lastPlayer;
     }
 
-    public Players GetCurrentPlayer()
+    public void ResetGame()
     {
-        return currentPlayer;
+        board.Reset();
+        ResetGrid();
     }
 
-    //public void ResetGame()
-    //{
-    //    StartGame();
-    //}
+    private void UpdateUIWithCurrentPlayer()
+    {
+        Director.Instance.managerUI.SetCurrentPlayer( currentPlayer.ToString() );
+        Debug.Log( "Current player: "+ currentPlayer.ToString() );
+    }
+
+    private void UpdateUIWithWinner()
+    {
+        Director.Instance.managerUI.SetWinner( currentPlayer, winnerCount[(int)Players.X], winnerCount[(int)Players.O] );
+        Debug.Log( " + Winner: "+ currentPlayer.ToString() );
+    }
     #endregion
 }

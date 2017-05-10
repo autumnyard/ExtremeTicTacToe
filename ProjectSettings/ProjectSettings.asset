@@ -6,7 +6,7 @@ PlayerSettings:
   serializedVersion: 11
   productGUID: bcf591a09437f8a408c955f953a9ce7c
   AndroidProfiler: 0
-  defaultScreenOrientation: 4
+  defaultScreenOrientation: 2
   targetDevice: 2
   useOnDemandResources: 0
   accelerometerFrequency: 60
@@ -136,6 +136,7 @@ PlayerSettings:
   protectGraphicsMemory: 0
   useHDRDisplay: 0
   applicationIdentifier:
+    Android: com.AutumnYard.ExtremeTicTacToe
     Standalone: com.AutumnYard.ExtremeTicTacToe
   buildNumber: {}
   AndroidBundleVersionCode: 1

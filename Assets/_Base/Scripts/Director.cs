@@ -16,8 +16,6 @@ public class Director : MonoBehaviour
     public ManagerUI managerUI;
     //public ScoreManager scoreManager;
 
-    public Board board;
-
     public Structs.GameMode currentGameMode { private set; get; }
     public Structs.GameDifficulty currentGameDifficulty { private set; get; }
     public Structs.GameView currentGameView { private set; get; }
@@ -77,10 +75,9 @@ public class Director : MonoBehaviour
                 break;
 
             case Structs.GameScene.LoadingGame:
-                board.Reset();
+                gameManager.ResetGame();
                 gameManager.StartGame();
                 managerUI.SetPanels();
-                managerUI.SetCurrentPlayer( gameManager.GetCurrentPlayer().ToString() );
                 managerCamera.SwitchToCamera( ManagerCamera.Cameras.Static );
 
                 // And go!
@@ -126,17 +123,7 @@ public class Director : MonoBehaviour
         currentGameDifficulty = gameDifficulty;
         currentGameView = viewMode;
     }
-
-    private void PlayTurn( int row, int column, GameManager.Players player )
-    {
-        // Trigger graphical feedback, info and effects
-        board.PressOnPosition( row, column, gameManager.currentPlayer );
-
-        // Modify game state
-        gameManager.PlayTurn( row, column );
-
-        managerUI.SetCurrentPlayer( gameManager.GetCurrentPlayer().ToString() );
-    }
+    
 
     #endregion
 
@@ -167,8 +154,6 @@ public class Director : MonoBehaviour
 
     public void GameEnd( GameManager.Players winner )
     {
-        managerUI.SetWinner( winner );
-
         ChangeScene( Structs.GameScene.GameEnd );
     }
 
@@ -197,9 +182,10 @@ public class Director : MonoBehaviour
             Transform thingie = hit.collider.transform;
             if( thingie.CompareTag( "BoardPosition" ) )
             {
-                BoardPosition pos = thingie.GetComponent<BoardPosition>();
+                var pos = thingie.GetComponent<BoardPosition>();
                 //Debug.Log( "This is BoardPosition " + pos.transform.name );
-                PlayTurn( pos.row, pos.column, gameManager.currentPlayer );
+                gameManager.PlayTurn( pos.row, pos.column );
+
             }
             //else
             //{

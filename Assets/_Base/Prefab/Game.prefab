@@ -60,6 +60,8 @@ MonoBehaviour:
   panelScore: {fileID: 0}
   currentPlayer: {fileID: 0}
   winner: {fileID: 0}
+  countXWins: {fileID: 0}
+  countOWins: {fileID: 0}
 --- !u!114 &114237308813908008
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -98,4 +100,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: e092eb008352a5e4cb75ad260e3a9e50, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  board: {fileID: 0}
   currentPlayer: -1
+  lastPlayerWhoBegan: 0
+  winnerCount: 000000000000000000000000

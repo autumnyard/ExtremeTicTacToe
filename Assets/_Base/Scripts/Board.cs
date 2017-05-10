@@ -39,7 +39,7 @@ public class Board : MonoBehaviour
     #region Monobehaviour
     void Awake()
     {
-        Director.Instance.board = this;
+        //Director.Instance.board = this;
     }
 
     void Start()
